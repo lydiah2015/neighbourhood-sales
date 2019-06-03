@@ -19,7 +19,7 @@ from django.conf.urls.static import static
 from django.conf import settings
 
 from neighbourhood.views import IndexView, EditProfileView,ProfileView,\
-                                BusinessesView,ContactsView,NeighbourhoodProfileView
+                                NeighbourhoodProfileView
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
@@ -27,8 +27,6 @@ urlpatterns = [
     # neighbourhood urls
     url(r"^$",IndexView.as_view(),name="neighbourhood.index"),
     url(r"^profile$",ProfileView.as_view(),name="neighbourhood.profile"),
-    url(r"^contacts$",ContactsView.as_view(),name="neighbourhood.contacts"),
-    url(r"^businesses$",BusinessesView.as_view(),name="neighbourhood.businesses"),
     url(r"^neighbourhood$",NeighbourhoodProfileView.as_view(),name="neighbourhood.neighbourhood"),
     url(r"^edit_profile$",EditProfileView.as_view(),name="neighbourhood.edit-profile"),
 

@@ -1,5 +1,5 @@
 from django import forms
-from neighbourhood.models import Profile,Neighbourhood
+from neighbourhood.models import Profile,Neighbourhood,Post
 
 class ProfileForm(forms.ModelForm):
     '''
@@ -14,3 +14,10 @@ class ProfileForm(forms.ModelForm):
                 'neighbourhood',
                 'biography',
                 'profile_photo']
+
+class PostForm(forms.ModelForm):
+    class Meta:
+        model=Post
+        fields=[
+            
+        ]

@@ -87,6 +87,7 @@ class Post(models.Model):
                 on_delete=models.CASCADE,null=True
 
     )
+    title=models.CharField(max_length=255, null=True)
     body=models.TextField(blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
     inserted_at = models.DateTimeField(auto_now=True)
