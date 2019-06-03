@@ -80,11 +80,13 @@ class PostsView(View):
         return form
 
     def save_create_edit_post_form(self,request):
+        print(request.GET)
         post_id=request.GET.get("post_id",None)
         form=PostForm(request.POST,request.FILES)
-        if post_id !=None:
+        print(post_id)
+        if post_id != None:
             try:
-                p=Post.object.get(pk=int(post_id))
+                p=Post.objects.get(pk=int(post_id))
                 form=PostForm(request.POST,request.FILES,instance=p)
             except Post.DoesNotExist:
                 pass
@@ -98,8 +100,9 @@ class PostsView(View):
 
     @method_decorator([login_required,has_profile])
     def get(self,request,*args, **kwargs):
+        post_id=request.GET.get("post_id",None)
         form =self.create_post_form(request)
-        return render(request,"core/create_edit_post.html",{"form":form})
+        return render(request,"core/create_edit_post.html",{"form":form,"post_id":post_id})
 
     @method_decorator([login_required,has_profile])
     def post(self,request,*args, **kwargs):
