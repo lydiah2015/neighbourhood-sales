@@ -1,9 +1,9 @@
-myBlog
+Neighbourhood
 ==============
 
 **Author**: [Lydia Mitchelle Makini](https://github.com/lydiah2015)
 ## Description
-[myBlog](https://github.com/lydiah2015/myBlog.git) is a web application that allows you to be in the loop about everything happening in your neighborhood. From contact information of different handyman to meeting announcements or even alerts. 
+[Neighbourhood](https://github.com/lydiah2015/TheNeighbourhood) is a web application that allows you to be in the loop about everything happening in your neighborhood. From contact information of different handyman to meeting announcements or even alerts. 
 
 ## Installation
 
@@ -12,7 +12,7 @@ myBlog
 
 ### Cloning the repository
 ```bash
-git clone https://github.com/lydiah2015/myBlog.git && cd 
+git clone https://github.com/lydiah2015/TheNeighbourhood.git && cd TheNeighbourhood
 ```
 
 ### Creating a virtual environment
@@ -67,12 +67,12 @@ heroku run python manage.py migrate
 ## Live Demo
 
 The web app can be accessed from the following link
-[https://elleblog.herokuapp.com/](https://elleblog.herokuapp.com/)
+[https://the-neighbour.herokuapp.com/](https://the-neighbour.herokuapp.com/)
 
 ## Technology used
 
 * [Python3.6](https://www.python.org/)
-* [Django]()
+* [Django](https://www.djangoproject.com/)
 * [Heroku](https://heroku.com)
 
 ## Known Bugs 
