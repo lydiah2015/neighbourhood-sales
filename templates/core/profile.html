@@ -1,0 +1,22 @@
+{% extends "base/base.html" %}
+{% load i18n %}
+{% load bootstrap4 %}
+{% load staticfiles %}
+
+{% block content %}
+{{ block.super }}
+<div class="container">
+    <div class="row centered-form">
+        <div class="col-md-8">
+            <h3>First name: {{request.user.profile.first_name}}</h3>
+            <h3>Last name: {{request.user.profile.last_name}}</h3>
+            <div>
+
+            </div>
+            <a class="btn btn-primary btn-sm" href="{% url 'neighbourhood.edit-profile' %}">Edit profile</a>
+
+        </div>
+    </div>
+
+</div>
+{% endblock %}
