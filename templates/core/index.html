@@ -7,7 +7,7 @@
 {{ block.super }}
 <div class="container">
     <div class="profile-row">
-        <a href="#" class="btn btn-primary btn-sm">Add post</a>
+        <a href="{% url 'neighbourhood.create-edit-posts' %}" class="btn btn-primary btn-sm">Add post</a>
         <div class="card-columns">
             {% if posts %}
             {% for post in posts %}
@@ -15,11 +15,12 @@
                     <div class="card-body">
                         <h5 class="card-title">{{post.title}}</h5>
                         <p class="card-text">{{post.body}}</p>
+                        <p class="card-text">by {{post.profile.user.username}}</p>
                         <p>{{post.created_at | date }}</p>
                     </div>
                     {% if post.profile == request.user %}
                     <div class="card-footer">
-                        <a href="#" class="btn btn-primary btn-sm">Edit post</a>
+                        <a href="{% url 'neighbourhood.create-edit-posts' %}?post_id={{post.pk}}" class="btn btn-primary btn-sm">Edit post</a>
                     </div>
                     {% endif %}
             </div>
