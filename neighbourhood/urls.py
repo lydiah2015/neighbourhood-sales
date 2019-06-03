@@ -27,6 +27,7 @@ urlpatterns = [
     # neighbourhood urls
     url(r"^$",IndexView.as_view(),name="neighbourhood.index"),
     url(r"^profile$",ProfileView.as_view(),name="neighbourhood.profile"),
+    
     url(r"^neighbourhood$",NeighbourhoodProfileView.as_view(),name="neighbourhood.neighbourhood"),
     url(r"^edit_profile$",EditProfileView.as_view(),name="neighbourhood.edit-profile"),
 

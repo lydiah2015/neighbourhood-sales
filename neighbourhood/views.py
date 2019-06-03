@@ -2,7 +2,7 @@ from django.shortcuts import render,redirect
 from django.views import View
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
-from neighbourhood.forms import ProfileForm
+from neighbourhood.forms import ProfileForm,PostForm
 from neighbourhood.models import Profile,Neighbourhood
 from neighbourhood.decorators import has_profile
 
@@ -12,11 +12,14 @@ class IndexView(View):
     def get(self,request,*args, **kwargs):
         return render(request,"core/index.html",{})
 
+
+
 class ProfileView(View):
     http_method_names = ['get']
     @method_decorator([login_required,has_profile])
     def get(self,request,*args, **kwargs):
-        return render(request,"core/profile.html",{})
+        posts=request.user.profile.profile_posts.all()
+        return render(request,"core/profile.html",{"posts":posts})
 
 class EditProfileView(View):
     @method_decorator(login_required)
@@ -59,3 +62,17 @@ class NeighbourhoodProfileView(View):
         businesses=request.user.profile.neighbourhood.businesses.all()
         contacts=request.user.profile.neighbourhood.contacts.all()
         return render(request,"core/neighbourhood.html",{"businesses":businesses,"contacts":contacts})
+
+
+class PostsView(View):
+    http_method_names = ['post']
+
+    def create_post_form(self,request):
+        post_id=request.GET.get("form_id",None)
+        if post_id:
+            form
+
+    @method_decorator([login_required,has_profile])
+    def post(self,request,*args, **kwargs):
+         pass
+
