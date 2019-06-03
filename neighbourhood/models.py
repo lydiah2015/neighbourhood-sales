@@ -33,7 +33,7 @@ class Location(models.Model):
 
 class Neighbourhood(models.Model):
     name=models.CharField(max_length=255, null=False, unique=True)
-    neighbourhood=models.ForeignKey("neighbourhood.Location",
+    location=models.ForeignKey("neighbourhood.Location",
                 related_name="neighbourhoods",
                 on_delete=models.CASCADE,null=True
 
@@ -42,7 +42,7 @@ class Neighbourhood(models.Model):
     inserted_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
-        return "neighbourhood:{}".format(self.name if self.name else self.id)
+        return "{}".format(self.name if self.name else self.id)
 
 class Business(models.Model):
     name=models.CharField(max_length=255, null=True)
