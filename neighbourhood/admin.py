@@ -1,5 +1,5 @@
 from django.contrib import admin
-from neighbourhood.models import Profile, Neighbourhood, Post, Location, Contact
+from neighbourhood.models import Profile, Neighbourhood, Post, Location, Contact, Business
 
 admin.site.register(
     Neighbourhood,
@@ -23,4 +23,10 @@ admin.site.register(
     Profile,
     list_display=["user","created_at"],
     search_fields=["user__username"],
+)
+
+admin.site.register(
+    Business,
+    list_display=["name","created_at"],
+    search_fields=["name"],
 )
