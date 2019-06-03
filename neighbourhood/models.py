@@ -19,12 +19,14 @@ class Profile(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     inserted_at = models.DateTimeField(auto_now=True)
 
+
     def __str__(self):
         return "profile:{}".format(self.user.username)
 
 
 class Location(models.Model):
     name=models.CharField(max_length=255, null=False,unique=True)
+    description=models.CharField(max_length=255, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
     inserted_at = models.DateTimeField(auto_now=True)
 
@@ -46,7 +48,8 @@ class Neighbourhood(models.Model):
         return "{}".format(self.name if self.name else self.id)
 
 class Business(models.Model):
-    name=models.CharField(max_length=255, null=True)
+    name=models.CharField(max_length=255, null=False)
+    description=models.CharField(max_length=255, null=True)
     neighbourhood=models.ForeignKey("neighbourhood.Neighbourhood",
                 related_name="businesses",
                 on_delete=models.CASCADE,null=True
@@ -59,7 +62,7 @@ class Business(models.Model):
         return "business:{}".format(self.name if self.name else self.id)
 
 class Contact(models.Model):
-    name=models.CharField(max_length=255, null=True)
+    name=models.CharField(max_length=255, null=False)
     descripion=models.CharField(max_length=255, null=True)
     email=models.CharField(max_length=255, null=True)
     phone_number=models.CharField(max_length=255, null=True)

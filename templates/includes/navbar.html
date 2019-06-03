@@ -9,12 +9,11 @@
         <li class="nav-item active">
           <a class="nav-link" href="{% url 'neighbourhood.index' %}">Home <span class="sr-only">(current)</span></a>
         </li>
+        {% if user.is_authenticated %}
         <li class="nav-item">
-          <a class="nav-link" href="#">businesses</a>
+          <a class="nav-link" href="{% url 'neighbourhood.neighbourhood' %}">My neighbourhood</a>
         </li>
-        <li class="nav-item">
-            <a class="nav-link" href="#">Contacts</a>
-        </li>
+        {% endif %}
       </ul>
       {% if user.is_authenticated %}
       <ul class="navbar-nav ml-auto">

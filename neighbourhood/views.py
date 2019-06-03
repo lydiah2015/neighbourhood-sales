@@ -12,7 +12,6 @@ class IndexView(View):
     def get(self,request,*args, **kwargs):
         return render(request,"core/index.html",{})
 
-
 class ProfileView(View):
     http_method_names = ['get']
     @method_decorator([login_required,has_profile])
@@ -53,4 +52,10 @@ class EditProfileView(View):
             return redirect("neighbourhood.index")
         return render(request,"core/create_profile.html",{"form":form})
         
-
+class NeighbourhoodProfileView(View):
+    http_method_names = ['get']
+    @method_decorator([login_required,has_profile])
+    def get(self,request,*args, **kwargs):
+        businesses=request.user.profile.neighbourhood.businesses.all()
+        contacts=request.user.profile.neighbourhood.contacts.all()
+        return render(request,"core/neighbourhood.html",{"businesses":businesses,"contacts":contacts})
