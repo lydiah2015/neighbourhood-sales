@@ -14,6 +14,7 @@ class Profile(models.Model):
     )
     first_name=models.CharField(max_length=255, null=True)
     last_name=models.CharField(max_length=255, null=True)
+    biography=models.CharField(max_length=255, null=True)
     profile_photo = models.ImageField(upload_to = 'image/')
     created_at = models.DateTimeField(auto_now_add=True)
     inserted_at = models.DateTimeField(auto_now=True)

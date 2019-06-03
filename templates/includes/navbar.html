@@ -16,7 +16,7 @@
       {% if user.is_authenticated %}
       <ul class="navbar-nav ml-auto">
         <li class="nav-item">
-          <a class="nav-link" href="#">Profile</a>
+          <a class="nav-link" href="{% url 'neighbourhood.profile' %}">Profile</a>
         </li>
       </ul>
       {% else %}

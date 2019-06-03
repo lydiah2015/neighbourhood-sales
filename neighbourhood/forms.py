@@ -12,4 +12,5 @@ class ProfileForm(forms.ModelForm):
         fields=['first_name',
                 'last_name',
                 'neighbourhood',
+                'biography',
                 'profile_photo']

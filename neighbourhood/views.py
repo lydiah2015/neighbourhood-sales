@@ -7,11 +7,17 @@ from neighbourhood.models import Profile,Neighbourhood
 from neighbourhood.decorators import has_profile
 
 class IndexView(View):
-    http_method_names = ['get','post']
+    http_method_names = ['get']
     @method_decorator([login_required,has_profile])
     def get(self,request,*args, **kwargs):
         return render(request,"core/index.html",{})
 
+
+class ProfileView(View):
+    http_method_names = ['get']
+    @method_decorator([login_required,has_profile])
+    def get(self,request,*args, **kwargs):
+        return render(request,"core/profile.html",{})
 
 class EditProfileView(View):
     @method_decorator(login_required)

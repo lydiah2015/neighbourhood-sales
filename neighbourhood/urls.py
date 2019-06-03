@@ -18,14 +18,15 @@ from django.conf.urls import url, include
 from django.conf.urls.static import static
 from django.conf import settings
 
-from neighbourhood.views import IndexView, EditProfileView
+from neighbourhood.views import IndexView, EditProfileView,ProfileView
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^accounts/', include('registration.backends.simple.urls')),
     # neighbourhood urls
     url(r"^$",IndexView.as_view(),name="neighbourhood.index"),
-    url(r"^edit_profile$",EditProfileView.as_view(),name="neighbourhood.edit-profile")
+    url(r"^profile$",ProfileView.as_view(),name="neighbourhood.profile"),
+    url(r"^edit_profile$",EditProfileView.as_view(),name="neighbourhood.edit-profile"),
 
 ]
 

@@ -7,16 +7,77 @@
 {{ block.super }}
 <div class="container">
     <div class="row centered-form">
-        <div class="col-md-8">
-            <h3>First name: {{request.user.profile.first_name}}</h3>
-            <h3>Last name: {{request.user.profile.last_name}}</h3>
-            <div>
+    <!--Grid column-->
+    <div class="col-lg-4 col-md-12 mb-4">
 
+            <!--Card-->
+            <div class="card testimonial-card">
+        
+                <!--Background color-->
+                <div class="card-up teal lighten-2">
+                </div>
+                {% if request.user.profile.profile_photo %}
+                <!--Avatar-->
+                <div class="avatar mx-auto white"><img src="{{request.user.profile.profile_photo.url}}"
+                    alt="avatar mx-auto white" class="rounded-circle img-fluid">
+                </div>
+                {% endif %}
+        
+                <div class="card-body">
+                <!--Name-->
+                <h4 class="card-title mt-1">{{request.user.profile.first_name}} {{request.user.profile.last_name}}</h4>
+                <hr>
+                <h5 class="card-title mt-1">{{request.user.profile.neighbourhood.name}}</h5>
+                <hr>
+                <!--Quotation-->
+                <p><i class="fas fa-quote-left"></i>{{request.user.profile.biography}}</p>
+                </div>
+                <div class="card-footer">
+                    <a href="{% url 'neighbourhood.edit-profile' %}" class="btn btn-primary btn-sm">Edit profile</a>
+                </div>
+        
             </div>
-            <a class="btn btn-primary btn-sm" href="{% url 'neighbourhood.edit-profile' %}">Edit profile</a>
-
+            <!--Card-->
+          
         </div>
     </div>
 
 </div>
 {% endblock %}
+
+
+
+
+
+
+    <!--Grid column-->
+    <div class="col-lg-4 col-md-12 mb-4">
+
+        <!--Card-->
+        <div class="card testimonial-card">
+    
+            <!--Background color-->
+            <div class="card-up teal lighten-2">
+            </div>
+            {% if request.user.profile.profile_photo %}
+            <!--Avatar-->
+            <div class="avatar mx-auto white"><img src="https://mdbootstrap.com/img/Photos/Avatars/img%20(27).jpg"
+                alt="avatar mx-auto white" class="rounded-circle img-fluid">
+            </div>
+            {% endif %}
+    
+            <div class="card-body">
+            <!--Name-->
+            <h4 class="card-title mt-1">{{request.user.profile.first_name}} {{request.user.profile.last_name}}</h4>
+            <hr>
+            <h5 class="card-title mt-1">{{request.user.profile.neighbourhood.name}}</h5>
+            <hr>
+            <!--Quotation-->
+            <p><i class="fas fa-quote-left"></i>{{request.user.profile.biography}}</p>
+            </div>
+    
+        </div>
+        <!--Card-->
+      
+    </div>
+          <!--Grid column-->
