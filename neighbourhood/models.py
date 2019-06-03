@@ -32,7 +32,7 @@ class Location(models.Model):
 
 
 class Neighbourhood(models.Model):
-    name=models.CharField(max_length=255, null=True)
+    name=models.CharField(max_length=255, null=False, unique=True)
     neighbourhood=models.ForeignKey("neighbourhood.Location",
                 related_name="neighbourhoods",
                 on_delete=models.CASCADE,null=True
