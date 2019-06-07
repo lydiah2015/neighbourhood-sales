@@ -153,3 +153,18 @@ class CreateProductsView(View):
         if status==True:
             return redirect("neighbourhood.index")
         return render(request,"core/create_edit_product.html",{"form":form})
+
+    
+class AddToWish(View):
+    http_method_names = ['get']
+    @method_decorator([login_required,has_profile])
+    def get(self,request,*args, **kwargs):
+        products= request.user.profile.neighbourhood.products.all()
+        return render(request,"core/index.html",{"products":products})
+
+
+def add_to_wishlist(request,product_id):
+    pass
+
+def add_to_cart(request,product_id):
+    pass
