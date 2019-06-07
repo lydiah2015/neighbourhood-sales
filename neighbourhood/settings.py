@@ -29,6 +29,7 @@ SECRET_KEY = config("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
+PRODUCTION= config('PRODUCTION', default=False, cast=bool)
 
 ALLOWED_HOSTS = config('ALLOWED_HOSTS', cast=Csv())
 
@@ -85,6 +86,8 @@ WSGI_APPLICATION = 'neighbourhood.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
 
+
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
@@ -93,14 +96,15 @@ DATABASES = {
 }
 
 ## in production
-# DATABASES = {
-#     'default': dj_database_url.config(
-#         default=config("DATABASE_URL")
-#     )
-# }
+if PRODUCTION:
+    DATABASES = {
+        'default': dj_database_url.config(
+            default=config("DATABASE_URL")
+        )
+    }
 
-# db_from_env = dj_database_url.config(conn_max_age=500)
-# DATABASES['default'].update(db_from_env)
+    db_from_env = dj_database_url.config(conn_max_age=500)
+    DATABASES['default'].update(db_from_env)
 
 
 
