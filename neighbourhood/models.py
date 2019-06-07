@@ -139,3 +139,68 @@ class Post(models.Model):
     def __str__(self):
         return "Post:{}".format(self.id)
     
+
+
+class ProductCategories(models.Model):
+    CATEGORIES=(('Electronics', 'Electronics'), ('Clothes', 'Clothes'), ('Food', 'Food'), ('Furniture', 'Furniture'))
+    category=models.CharField(max_length=255, null=True)
+    
+class Product(models.Model):
+    CATEGORIES=(('Electronics', 'Electronics'), ('Clothes', 'Clothes'), ('Food', 'Food'), ('Furniture', 'Furniture'))
+    seller=models.ForeignKey("neighbourhood.Profile",
+                related_name="profile_products",
+                on_delete=models.CASCADE,null=True
+    )
+    neighbourhood=models.ForeignKey("neighbourhood.Neighbourhood",
+                related_name="products",
+                on_delete=models.CASCADE,null=True
+    )
+    category=models.CharField(max_length=255, null=True,choices=CATEGORIES)
+    name=models.CharField(max_length=255, null=False)
+    description=models.TextField(blank=True)
+    price=models.PositiveIntegerField(null=False)
+    stock=models.PositiveIntegerField(null=False)
+    photo=models.ImageField(upload_to = 'image/')
+    created_at = models.DateTimeField(auto_now_add=True)
+    inserted_at = models.DateTimeField(auto_now=True)
+
+class Wishlist(models.Model):
+    buyer=models.OneToOneField("neighbourhood.Profile",
+                related_name="my_wishlist",
+                on_delete=models.CASCADE,null=True
+    )
+    created_at = models.DateTimeField(auto_now_add=True)
+    inserted_at = models.DateTimeField(auto_now=True)
+
+class WishlistProducts(models.Model):
+    wishlist=models.ForeignKey("neighbourhood.Wishlist",
+                related_name="wishlist_products",
+                on_delete=models.CASCADE,null=True
+    )
+    product=models.ForeignKey("neighbourhood.Product",
+                related_name="product_wishlists",
+                on_delete=models.CASCADE,null=True
+    )
+    created_at = models.DateTimeField(auto_now_add=True)
+    inserted_at = models.DateTimeField(auto_now=True)
+
+
+class Cart(models.Model):
+    buyer=models.OneToOneField("neighbourhood.Profile",
+                related_name="my_cart",
+                on_delete=models.CASCADE,null=True
+    )
+    created_at = models.DateTimeField(auto_now_add=True)
+    inserted_at = models.DateTimeField(auto_now=True)
+
+class CartProducts(models.Model):
+    cart=models.ForeignKey("neighbourhood.Cart",
+                related_name="cart_products",
+                on_delete=models.CASCADE,null=True
+    )
+    product=models.ForeignKey("neighbourhood.Product",
+                related_name="product_carts",
+                on_delete=models.CASCADE,null=True
+    )
+    created_at = models.DateTimeField(auto_now_add=True)
+    inserted_at = models.DateTimeField(auto_now=True)

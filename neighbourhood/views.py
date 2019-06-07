@@ -2,27 +2,25 @@ from django.shortcuts import render,redirect,get_object_or_404
 from django.views import View
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
-from neighbourhood.forms import ProfileForm,PostForm
-from neighbourhood.models import Profile,Neighbourhood,Post
+from neighbourhood.forms import ProfileForm,PostForm,ProductForm
+from neighbourhood.models import Profile,Neighbourhood,Post,Product
 from neighbourhood.decorators import has_profile
 
 class IndexView(View):
     http_method_names = ['get']
     @method_decorator([login_required,has_profile])
     def get(self,request,*args, **kwargs):
-        posts= request.user.profile.neighbourhood.posts.all()
-        return render(request,"core/index.html",{"posts":posts})
-
-
+        products= request.user.profile.neighbourhood.products.all()
+        return render(request,"core/index.html",{"products":products})
 
 class ProfileView(View):
     http_method_names = ['get']
     @method_decorator([login_required,has_profile])
     def get(self,request,*args, **kwargs):
-        posts=request.user.profile.profile_posts.all()
+        products=request.user.profile.profile_products.all()
         # print("posts")
         # print(posts)
-        return render(request,"core/profile.html",{"posts":posts})
+        return render(request,"core/profile.html",{"products":products})
 
 class EditProfileView(View):
     @method_decorator(login_required)
@@ -110,3 +108,48 @@ class PostsView(View):
         if status==True:
             return redirect("neighbourhood.index")
         return render(request,"core/create_edit_post.html",{"form":form})
+
+
+class CreateProductsView(View):
+    http_method_names = ['get','post']
+    def create_product_form(self,request):
+        product_id=request.GET.get("product_id",None)
+        form=ProductForm()
+        if product_id:
+            try:
+                form=ProductForm(instance=get_object_or_404(Product,pk=int(product_id)))
+            except:
+                pass
+        return form
+
+    def save_create_edit_product_form(self,request):
+        print(request.GET)
+        product_id=request.GET.get("product_id",None)
+        form=ProductForm(request.POST,request.FILES)
+        print(product_id)
+        if product_id != None:
+            try:
+                p=Product.objects.get(pk=int(product_id))
+                form=ProductForm(request.POST,request.FILES,instance=p)
+            except Product.DoesNotExist:
+                pass
+        if form.is_valid():
+            product=form.save(commit=False)
+            product.seller=request.user.profile
+            product.neighbourhood=request.user.profile.neighbourhood
+            product.save()
+            return True,form
+        return False,form
+
+    @method_decorator([login_required,has_profile])
+    def get(self,request,*args, **kwargs):
+        product_id=request.GET.get("product_id",None)
+        form =self.create_product_form(request)
+        return render(request,"core/create_edit_product.html",{"form":form,"product_id":product_id})
+
+    @method_decorator([login_required,has_profile])
+    def post(self,request,*args, **kwargs):
+        status,form=self.save_create_edit_product_form(request)
+        if status==True:
+            return redirect("neighbourhood.index")
+        return render(request,"core/create_edit_product.html",{"form":form})

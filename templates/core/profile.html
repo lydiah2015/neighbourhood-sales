@@ -2,7 +2,6 @@
 {% load i18n %}
 {% load bootstrap4 %}
 {% load staticfiles %}
-
 {% block content %}
 {{ block.super }}
 <div class="container">
@@ -39,59 +38,34 @@
             <!--Card-->
         </div>
         <div class="col-md-8">
-                <div>Posts</div>
+                <div>Products</div>
                 <div class="card-columns">
-                    {% for post in posts %}
+                    {% for product in products %}
                     <div class="card">
+
+                            <div class="view view-cascade overlay">
+                                <img src="{{product.photo.url}}" class="card-img-top"
+                                alt="sample photo">
+                                <a>
+                                <div class="mask rgba-white-slight"></div>
+                                </a>
+                            </div>
+   
                             <div class="card-body">
-                                <h5 class="card-title">{{post.title}}</h5>
-                                <p class="card-text">{{post.body}}</p>
+                                <h5 class="card-title">{{product.title}}</h5>
+                                <p class="card-text">category: {{product.category}}</p>
+                                <p class="card-text">description: {{product.description}}</p>
+                                <p class="card-text">price: {{product.price}}</p>
+                                <p class="card-text">stock: {{product.stock}}</p>
                             </div>
                             <div class="card-footer">
-                                <a href="{% url 'neighbourhood.create-edit-posts' %}?post_id={{post.pk}}" class="btn btn-primary btn-sm">Edit post</a>
+                                <a href="{% url 'neighbourhood.create-edit-products' %}?product_id={{product.pk}}" class="btn btn-primary btn-sm">Edit product</a>
                             </div>
                     </div>
                     {% endfor %}
                 </div>
         </div>
     </div>
-
 </div>
 {% endblock %}
 
-
-
-
-
-
-    <!--Grid column-->
-    <div class="col-lg-4 col-md-12 mb-4">
-
-        <!--Card-->
-        <div class="card testimonial-card">
-    
-            <!--Background color-->
-            <div class="card-up teal lighten-2">
-            </div>
-            {% if request.user.profile.profile_photo %}
-            <!--Avatar-->
-            <div class="avatar mx-auto white"><img src="https://mdbootstrap.com/img/Photos/Avatars/img%20(27).jpg"
-                alt="avatar mx-auto white" class="rounded-circle img-fluid">
-            </div>
-            {% endif %}
-    
-            <div class="card-body">
-            <!--Name-->
-            <h4 class="card-title mt-1">{{request.user.profile.first_name}} {{request.user.profile.last_name}}</h4>
-            <hr>
-            <h5 class="card-title mt-1">{{request.user.profile.neighbourhood.name}}</h5>
-            <hr>
-            <!--Quotation-->
-            <p><i class="fas fa-quote-left"></i>{{request.user.profile.biography}}</p>
-            </div>
-    
-        </div>
-        <!--Card-->
-      
-    </div>
-          <!--Grid column-->
